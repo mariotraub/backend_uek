@@ -1,6 +1,10 @@
 {
 	"type": "module",
 	"dependencies": {
+		"express": "^4.21.2",
 		"learnyounode": "^4.2.2"
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.9"
 	}
 }
