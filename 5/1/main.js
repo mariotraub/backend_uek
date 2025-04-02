@@ -31,7 +31,7 @@ app.get("/books/:id", (req, res) => {
 app.post("/books", (req, res) => {
 	const book = req.body;
 	books.push(new Book(book.isbn, book.title, book.year, book.author, res));
-	res.send(book);
+	res.status(201).send(book);
 });
 
 app.put("/books/:id", (req, res) => {
