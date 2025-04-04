@@ -1,0 +1,213 @@
+{
+  "v": 6,
+  "name": "ÜK - Library Tests",
+  "folders": [],
+  "requests": [
+    {
+      "v": "11",
+      "name": "GET /books",
+      "method": "GET",
+      "endpoint": "http://localhost:3000/books",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "pw.test(\"Response is ok\", () => {\n  pw.expect(pw.response.status).toBe(200);\n});\npw.test(\"Check if Array\", () => {\n  const books = pw.response.body;\n  pw.expect(Array.isArray(books)).toBe(true);\n});\n",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": null,
+        "body": null
+      },
+      "requestVariables": [],
+      "responses": {}
+    },
+    {
+      "v": "11",
+      "name": "GET /books/{isbn}",
+      "method": "GET",
+      "endpoint": "http://localhost:3000/books/9780747532743",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "pw.test(\"Response is ok\", () => {\n  pw.expect(pw.response.status).toBe(200);\n});\npw.test(\"Check if Array\", () => {\n  const books = pw.response.body;\n  pw.expect(books.isbn).toBe(\"9780747532743\");\n});\n",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": null,
+        "body": null
+      },
+      "requestVariables": [],
+      "responses": {}
+    },
+    {
+      "v": "11",
+      "name": "POST /books",
+      "method": "POST",
+      "endpoint": "http://localhost:3000/books",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "pw.test(\"Response is ok\", () => {\n  pw.expect(pw.response.status).toBe(201);\n});\npw.test(\"Check if Array\", () => {\n  const books = pw.response.body;\n  pw.expect(Array.isArray(books)).toBe(true);\n  pw.expect(\n  \tbooks.some(book =>\n        book.isbn === \"123456\" &&\n        book.title === \"Test\" &&\n        book.year === 2025 &&\n        book.author === \"Me\"\n     )\n  ).toBe(true);\n});\n",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": "application/json",
+        "body": " {\n    \"isbn\": \"123456\",\n    \"title\": \"Test\",\n    \"year\": 2025,\n    \"author\": \"Me\"\n  }"
+      },
+      "requestVariables": [],
+      "responses": {}
+    },
+    {
+      "v": "11",
+      "name": "POST /books (No Title)",
+      "method": "POST",
+      "endpoint": "http://localhost:3000/books",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "pw.test(\"Response is ok\", () => {\n  pw.expect(pw.response.status).toBe(422);\n});",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": "application/json",
+        "body": " {\n    \"isbn\": \"123456\",\n    \"year\": 2025,\n    \"author\": \"Me\"\n  }"
+      },
+      "requestVariables": [],
+      "responses": {}
+    },
+    {
+      "v": "11",
+      "name": "PUT /books/{isbn}",
+      "method": "PUT",
+      "endpoint": "http://localhost:3000/books/9780439064873",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "pw.test(\"Response is ok\", () => {\n  pw.expect(pw.response.status).toBe(200);\n});\npw.test(\"Check if Array\", () => {\n  const books = pw.response.body;\n  pw.expect(Array.isArray(books)).toBe(true);\n  pw.expect(\n  \tbooks.some(book =>\n        book.isbn === \"9780439064873\" &&\n        book.title === \"New Test\" &&\n        book.year === 2025 &&\n        book.author === \"Me\"\n     )\n  ).toBe(true);\n});\n",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": "application/json",
+        "body": "{\n  \"isbn\": \"9780439064873\",\n  \"title\": \"New Test\",\n  \"year\": 2025,\n  \"author\": \"Me\"\n}"
+      },
+      "requestVariables": [],
+      "responses": {}
+    },
+    {
+      "v": "11",
+      "name": "DELETE /books/{isbn}",
+      "method": "DELETE",
+      "endpoint": "http://localhost:3000/books/9780261103573",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "pw.test(\"Response is ok\", () => {\n  pw.expect(pw.response.status).toBe(204);\n});",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": null,
+        "body": null
+      },
+      "requestVariables": [],
+      "responses": {}
+    },
+    {
+      "v": "11",
+      "name": "POST /lends (400)",
+      "method": "POST",
+      "endpoint": "http://localhost:3000/lends",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "pw.test(\"Response is ok\", () => {\n  pw.expect(pw.response.status).toBe(400);\n});\n",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": "application/json",
+        "body": "{\n  \"isbn\": \"<doesnotexist>\",\n  \"customerId\": 123\n}"
+      },
+      "requestVariables": [],
+      "responses": {}
+    },
+    {
+      "v": "11",
+      "name": "POST /lends",
+      "method": "POST",
+      "endpoint": "http://localhost:3000/lends",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "pw.test(\"Response is ok\", () => {\n  pw.expect(pw.response.status).toBe(201);\n});\n\npw.env.set(\"LEND_ID\", pw.response.body[0].id);",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": "application/json",
+        "body": "{\n  \"isbn\": \"9780141439600\",\n  \"customerId\": 123\n}"
+      },
+      "requestVariables": [],
+      "responses": {}
+    },
+    {
+      "v": "11",
+      "name": "POST /lends - (again)",
+      "method": "POST",
+      "endpoint": "http://localhost:3000/lends",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "pw.test(\"Response is ok\", () => {\n  pw.expect(pw.response.status).toBe(400);\n});\n",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": "application/json",
+        "body": "{\n  \"isbn\": \"9780141439600\",\n  \"customerId\": 123\n}"
+      },
+      "requestVariables": [],
+      "responses": {}
+    },
+    {
+      "v": "11",
+      "name": "DELETE /lends/{id}",
+      "method": "DELETE",
+      "endpoint": "http://localhost:3000/lends/${LEND_ID}",
+      "params": [],
+      "headers": [],
+      "preRequestScript": "",
+      "testScript": "\npw.test(\"Status is ok\", ()=> {\n    pw.expect(pw.response.status).toBe(200);\n});\n\npw.env.set(\"LEND_ID\", pw.response.body[0].id);",
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "body": {
+        "contentType": null,
+        "body": null
+      },
+      "requestVariables": [],
+      "responses": {}
+    }
+  ],
+  "auth": {
+    "authActive": true,
+    "authType": "none"
+  },
+  "headers": [],
+  "_ref_id": "coll_m92gduyw_d99cf911-29b7-47ca-97fb-439955dfb13a"
+}
