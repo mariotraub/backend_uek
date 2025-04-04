@@ -14,13 +14,16 @@ app.get("/public", (_, res) => {
 });
 
 app.get("/private", (req, res) => {
-	const authEncoded = req.headers.authorization.replace(/^Basic\s+/i, '');
-	const auth = Buffer.from(authEncoded, 'base64').toString('utf8');
-	if (auth === `${userName}:${password}`) {
-		res.send("I'm a private endpoint");
-	} else {
-		res.sendStatus(401);
+	if (req.headers.authorization) {
+		const authEncoded = req.headers.authorization.replace(/^Basic\s+/i, '');
+		const auth = Buffer.from(authEncoded, 'base64').toString('utf8');
+		if (auth === `${userName}:${password}`) {
+			res.send("I'm a private endpoint");
+			return;
+		}
 	}
+	res.setHeader("WWW-Authenticate", "Basic realm='Server'")
+		.sendStatus(401);
 });
 
 app.listen(port, () => {
