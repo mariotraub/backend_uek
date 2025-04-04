@@ -28,7 +28,7 @@ app.get("/name", (req, res) => {
 });
 
 app.delete("/name", (req, res) => {
-	delete req.session.name;
+	req.session.destroy();
 	res.sendStatus(204);
 });
 
