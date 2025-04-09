@@ -17,7 +17,7 @@ class Book {
 	}
 }
 
-const books = [
+let books = [
 	new Book("978-3-16-148410-0", "JavaScript Basics", 2020, "John Doe"),
 	new Book("978-1-23-456789-7", "Advanced JS", 2021, "Jane Smith"),
 	new Book("978-0-12-345678-9", "Node.js in Action", 2019, "Alice Johnson"),
